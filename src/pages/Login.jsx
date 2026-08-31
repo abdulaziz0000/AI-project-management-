@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 import {
   Box,
   Paper,
@@ -21,7 +21,8 @@ import { Email, Lock, Visibility, VisibilityOff } from "@mui/icons-material";
 
 
 // Change this to match your backend
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;const initialFormState = {
+
+const initialFormState = {
   email: "",
   password: "",
 };
@@ -62,7 +63,7 @@ export default function Login() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     setServerError("");
 
@@ -71,72 +72,59 @@ export default function Login() {
     setLoading(true);
 
     try {
-     const loginRequest = {
-    email: formData.email.trim(),
-    password: formData.password
-};
+        const loginRequest = {
+            email: formData.email.trim(),
+            password: formData.password,
+        };
 
-const response = await axios.post(
-    `${API_BASE_URL}/auth/login`,
+       const response = await api.post(
+    "/auth/login",
     loginRequest
 );
 
-const data = response.data;
+        const data = response.data;
+        const token = data.accessToken;
 
-const token = data.accessToken;
+        // Decode JWT
+        const payload = JSON.parse(atob(token.split(".")[1]));
 
-const jwtPayload = JSON.parse(atob(token.split(".")[1]));
-const payload = JSON.parse(atob(token.split(".")[1]));
+        // Store authentication data
+        localStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem("userId", payload.userId);
+        localStorage.setItem("organizationId", payload.organizationId);
+        localStorage.setItem("role", payload.role);
 
-localStorage.setItem("organizationId", payload.organizationId);
-localStorage.setItem("userId", payload.userId);
-localStorage.setItem("role", payload.role);
+        localStorage.setItem(
+            "user",
+            JSON.stringify(data.user)
+        );
 
+        localStorage.setItem(
+            "organization",
+            JSON.stringify(data.organization)
+        );
 
+        localStorage.setItem(
+            "expiresIn",
+            data.expiresIn
+        );
 
-// Store authentication data
-localStorage.setItem(
-    "accessToken",
-    data.accessToken
-);
-
-localStorage.setItem(
-    "userId",
-    response.data.userId
-);
-
-localStorage.setItem(
-    "user",
-    JSON.stringify(data.user)
-);
-
-
-localStorage.setItem(
-    "organization",
-    JSON.stringify(data.organization)
-);
-
-
-localStorage.setItem(
-    "expiresIn",
-    data.expiresIn
-);
-
-
-navigate("/dashboard");
-
-
+        navigate("/dashboard");
 
     } catch (err) {
-      const message =
-        err.response?.data?.message ||
-        err.response?.data?.error ||
-        "Invalid email or password. Please try again.";
-      setServerError(message);
+        console.error("LOGIN ERROR:", err);
+
+        const message =
+            err.response?.data?.message ||
+            err.response?.data?.error ||
+            "Invalid email or password. Please try again.";
+
+        setServerError(message);
+
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
 
   const fieldSx = {
     "& .MuiOutlinedInput-root": {
