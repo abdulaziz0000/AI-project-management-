@@ -1,43 +1,47 @@
-export const formatCommentTime = (dateStr) => {
-    if (!dateStr) return "";
-
-    const date = new Date(dateStr);
-
-    if (isNaN(date.getTime())) {
+export const formatCommentTime = (createdAt) => {
+    if (!createdAt) {
         return "";
     }
 
+    const createdDate = new Date(createdAt);
     const now = new Date();
 
-    const diffMs = now.getTime() - date.getTime();
+    const diffInSeconds = Math.floor(
+        (now.getTime() - createdDate.getTime()) / 1000
+    );
 
-    const diffSeconds = Math.floor(diffMs / 1000);
-
-    if (diffSeconds < 60) {
-        return "Just now";
+    // Future date protection
+    if (diffInSeconds < 0) {
+        return "just now";
     }
 
-    const diffMinutes = Math.floor(diffSeconds / 60);
-
-    if (diffMinutes < 60) {
-        return `${diffMinutes}m ago`;
+    if (diffInSeconds < 60) {
+        return "just now";
     }
 
-    const diffHours = Math.floor(diffMinutes / 60);
+    const diffInMinutes = Math.floor(diffInSeconds / 60);
 
-    if (diffHours < 24) {
-        return `${diffHours}h ago`;
+    if (diffInMinutes < 60) {
+        return `${diffInMinutes} ${
+            diffInMinutes === 1 ? "minute" : "minutes"
+        } ago`;
     }
 
-    const diffDays = Math.floor(diffHours / 24);
+    const diffInHours = Math.floor(diffInMinutes / 60);
 
-    if (diffDays < 7) {
-        return `${diffDays}d ago`;
+    if (diffInHours < 24) {
+        return `${diffInHours} ${
+            diffInHours === 1 ? "hour" : "hours"
+        } ago`;
     }
 
-    return date.toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "short",
-        day: "numeric"
-    });
+    const diffInDays = Math.floor(diffInHours / 24);
+
+    if (diffInDays < 7) {
+        return `${diffInDays} ${
+            diffInDays === 1 ? "day" : "days"
+        } ago`;
+    }
+
+    return createdDate.toLocaleDateString();
 };
