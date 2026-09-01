@@ -155,80 +155,53 @@ const askQuestion = async () => {
 {/* =====================================================
     CHAT TOGGLE BUTTON
 ====================================================== */}
-
 {!open && (
-
-    <Fab
-        variant="extended"
-        color="primary"
+    <Button
+        variant="contained"
+        startIcon={<MdSmartToy />}
         onClick={() => setOpen(true)}
         sx={{
             position: "fixed",
-            right: {
-                xs: 16,
-                sm: 24,
-                md: 30
-            },
-            bottom: {
-                xs: 16,
-                sm: 24,
-                md: 30
-            },
+            right: { xs: 16, sm: 24, md: 30 },
+            bottom: { xs: 16, sm: 24, md: 30 },
 
-            width: {
-                xs: 56,
-                sm: "auto"
-            },
+            minWidth: { xs: 56, sm: 150 },
+            width: { xs: 56, sm: "auto" },
+            height: { xs: 56, sm: 52 },
 
-            height: {
-                xs: 56,
-                sm: 52
-            },
-
-            minWidth: {
-                xs: 56,
-                sm: 150
-            },
+            px: { xs: 0, sm: 2.5 },
 
             borderRadius: 3,
-
             zIndex: 2000,
 
-            boxShadow:
-                "0 8px 25px rgba(37,99,235,.35)",
-
             textTransform: "none",
-
             fontWeight: 700,
 
-            gap: 1,
+            whiteSpace: "nowrap",
+
+            boxShadow: "0 8px 25px rgba(37,99,235,.35)",
 
             "&:hover": {
-                boxShadow:
-                    "0 10px 30px rgba(37,99,235,.45)"
+                boxShadow: "0 10px 30px rgba(37,99,235,.45)"
+            },
+
+            // Hide text on mobile
+            "& .MuiButton-startIcon": {
+                margin: { xs: 0, sm: "0 8px 0 0" }
             }
         }}
     >
-
-        <MdSmartToy size={26} />
-
-        {/* Hide text on mobile */}
-
         <Box
             component="span"
             sx={{
-                display: {
-                    xs: "none",
-                    sm: "inline"
-                }
+                display: { xs: "none", sm: "inline" }
             }}
         >
             Ask AI
         </Box>
-
-    </Fab>
-
+    </Button>
 )}
+
 
 
             {/* =====================================================
@@ -239,18 +212,46 @@ const askQuestion = async () => {
 
                 <Paper
                     elevation={10}
-                    sx={{
-                        position: "fixed",
-                        right: 30,
-                        bottom: 30,
-                        width: 380,
-                        height: 560,
-                        borderRadius: 4,
-                        overflow: "hidden",
-                        display: "flex",
-                        flexDirection: "column",
-                        zIndex: 2000
-                    }}
+                   sx={{
+    position: "fixed",
+
+    right: {
+        xs: 8,
+        sm: 16,
+        md: 30
+    },
+
+    bottom: {
+        xs: 8,
+        sm: 16,
+        md: 30
+    },
+
+    width: {
+        xs: "calc(100vw - 16px)",
+        sm: 380,
+        md: 380
+    },
+
+    height: {
+        xs: "calc(100vh - 16px)",
+        sm: 560,
+        md: 560
+    },
+
+    maxWidth: "100vw",
+    maxHeight: "calc(100vh - 16px)",
+
+    borderRadius: {
+        xs: 2,
+        sm: 4
+    },
+
+    overflow: "hidden",
+    display: "flex",
+    flexDirection: "column",
+    zIndex: 2000
+}}
                 >
 
                     {/* ================= HEADER ================= */}
@@ -315,6 +316,9 @@ const askQuestion = async () => {
                         >
 
                             <MdClose />
+
+
+
 
                         </IconButton>
 
@@ -497,16 +501,17 @@ const askQuestion = async () => {
 
                     {/* ================= INPUT ================= */}
 
-                    <Box
-                        sx={{
-                            p: 1.5,
-                            borderTop:
-                                "1px solid #eee",
-                            display: "flex",
-                            gap: 1,
-                            background: "white"
-                        }}
-                    >
+                   <Box
+    sx={{
+        p: { xs: 1, sm: 1.5 },
+        borderTop: "1px solid #eee",
+        display: "flex",
+        alignItems: "center",
+        gap: 1,
+        background: "white",
+        minWidth: 0
+    }}
+>
 
                         <TextField
                             fullWidth
