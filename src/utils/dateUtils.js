@@ -18,20 +18,27 @@ export const formatCommentTime = (createdAt) => {
     const minutes = Math.floor(diffSeconds / 60);
 
     if (minutes < 60) {
-        return `${minutes} ${minutes === 1 ? "minute" : "minutes"} ago`;
+        return `${minutes} ${
+            minutes === 1 ? "minute" : "minutes"
+        } ago`;
     }
 
     const hours = Math.floor(minutes / 60);
 
     if (hours < 24) {
-        return `${hours} ${hours === 1 ? "hour" : "hours"} ago`;
+        return `${hours} ${
+            hours === 1 ? "hour" : "hours"
+        } ago`;
     }
 
     const days = Math.floor(hours / 24);
 
     if (days < 7) {
-        return `${days} ${days === 1 ? "day" : "days"} ago`;
+        return `${days} ${
+            days === 1 ? "day" : "days"
+        } ago`;
     }
 
     return new Date(createdTimestamp).toLocaleDateString();
 };
+

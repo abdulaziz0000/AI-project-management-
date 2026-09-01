@@ -234,12 +234,12 @@ function TaskDetails() {
 
     }, [taskId]);
 
-    const [, setTimeTick] = useState(0);
+const [, setTimeTick] = useState(0);
 
 useEffect(() => {
     const interval = setInterval(() => {
         setTimeTick((tick) => tick + 1);
-    }, 60000);
+    }, 1000);
 
     return () => clearInterval(interval);
 }, []);
