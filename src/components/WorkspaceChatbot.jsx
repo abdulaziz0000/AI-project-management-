@@ -165,11 +165,11 @@ const askQuestion = async () => {
             right: { xs: 16, sm: 24, md: 30 },
             bottom: { xs: 16, sm: 24, md: 30 },
 
-            minWidth: { xs: 56, sm: 150 },
-            width: { xs: 56, sm: "auto" },
-            height: { xs: 56, sm: 52 },
+            minWidth: { xs: 120, sm: 150 },
+            width: "auto",
+            height: { xs: 48, sm: 52 },
 
-            px: { xs: 0, sm: 2.5 },
+            px: { xs: 2, sm: 2.5 },
 
             borderRadius: 3,
             zIndex: 2000,
@@ -185,18 +185,12 @@ const askQuestion = async () => {
                 boxShadow: "0 10px 30px rgba(37,99,235,.45)"
             },
 
-            // Hide text on mobile
             "& .MuiButton-startIcon": {
-                margin: { xs: 0, sm: "0 8px 0 0" }
+                margin: "0 8px 0 0"
             }
         }}
     >
-        <Box
-            component="span"
-            sx={{
-                display: { xs: "none", sm: "inline" }
-            }}
-        >
+        <Box component="span">
             Ask AI
         </Box>
     </Button>
