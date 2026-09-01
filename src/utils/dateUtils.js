@@ -1,47 +1,50 @@
 export const formatCommentTime = (createdAt) => {
-    if (!createdAt) {
-        return "";
-    }
+if (!createdAt) {
+return "";
+}
 
-    const createdDate = new Date(createdAt);
-    const now = new Date();
 
-    const diffInSeconds = Math.floor(
-        (now.getTime() - createdDate.getTime()) / 1000
-    );
+const createdDate = new Date(createdAt);
+const now = new Date();
 
-    // Future date protection
-    if (diffInSeconds < 0) {
-        return "just now";
-    }
+if (Number.isNaN(createdDate.getTime())) {
+    return "";
+}
 
-    if (diffInSeconds < 60) {
-        return "just now";
-    }
+const diffInSeconds = Math.floor(
+    (now.getTime() - createdDate.getTime()) / 1000
+);
 
-    const diffInMinutes = Math.floor(diffInSeconds / 60);
+// Future timestamp or less than 1 minute ago
+if (diffInSeconds < 60) {
+    return "just now";
+}
 
-    if (diffInMinutes < 60) {
-        return `${diffInMinutes} ${
-            diffInMinutes === 1 ? "minute" : "minutes"
-        } ago`;
-    }
+const diffInMinutes = Math.floor(diffInSeconds / 60);
 
-    const diffInHours = Math.floor(diffInMinutes / 60);
+if (diffInMinutes < 60) {
+    return `${diffInMinutes} ${
+        diffInMinutes === 1 ? "minute" : "minutes"
+    } ago`;
+}
 
-    if (diffInHours < 24) {
-        return `${diffInHours} ${
-            diffInHours === 1 ? "hour" : "hours"
-        } ago`;
-    }
+const diffInHours = Math.floor(diffInMinutes / 60);
 
-    const diffInDays = Math.floor(diffInHours / 24);
+if (diffInHours < 24) {
+    return `${diffInHours} ${
+        diffInHours === 1 ? "hour" : "hours"
+    } ago`;
+}
 
-    if (diffInDays < 7) {
-        return `${diffInDays} ${
-            diffInDays === 1 ? "day" : "days"
-        } ago`;
-    }
+const diffInDays = Math.floor(diffInHours / 24);
 
-    return createdDate.toLocaleDateString();
+if (diffInDays < 7) {
+    return `${diffInDays} ${
+        diffInDays === 1 ? "day" : "days"
+    } ago`;
+}
+
+return createdDate.toLocaleDateString();
+
+
 };
