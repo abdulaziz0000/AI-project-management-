@@ -239,7 +239,7 @@ const [, setTimeTick] = useState(0);
 useEffect(() => {
     const interval = setInterval(() => {
         setTimeTick((tick) => tick + 1);
-    }, 1000);
+    }, 60000); // update every minute
 
     return () => clearInterval(interval);
 }, []);
@@ -1520,13 +1520,7 @@ useEffect(() => {
                                             const isEditing =
                                                 editingCommentId ===
                                                 comment.id;
-console.log("COMMENT TIME DEBUG", {
-    raw: comment.createdAt,
-    parsed: new Date(comment.createdAt).toString(),
-    timestamp: Date.parse(comment.createdAt),
-    now: new Date().toString(),
-    formatted: formatCommentTime(comment.createdAt)
-});
+
 
                                             return (
 
@@ -1658,7 +1652,7 @@ console.log("COMMENT TIME DEBUG", {
                                                                     </Typography>
 
 
-                                                                   {comment.createdAt && (
+{comment.createdAt && (
     <Typography
         variant="caption"
         color="text.secondary"
@@ -1667,8 +1661,6 @@ console.log("COMMENT TIME DEBUG", {
         }}
     >
         {formatCommentTime(comment.createdAt)}
-        {" | "}
-        {new Date().toISOString()}
     </Typography>
 )}
 
