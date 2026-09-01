@@ -1520,7 +1520,13 @@ useEffect(() => {
                                             const isEditing =
                                                 editingCommentId ===
                                                 comment.id;
-
+console.log("COMMENT TIME DEBUG", {
+    raw: comment.createdAt,
+    parsed: new Date(comment.createdAt).toString(),
+    timestamp: Date.parse(comment.createdAt),
+    now: new Date().toString(),
+    formatted: formatCommentTime(comment.createdAt)
+});
 
                                             return (
 
