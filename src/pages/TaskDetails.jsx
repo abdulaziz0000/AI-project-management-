@@ -1658,26 +1658,19 @@ console.log("COMMENT TIME DEBUG", {
                                                                     </Typography>
 
 
-                                                                    {comment.createdAt && (
-
-                                                                        <Typography
-                                                                            variant="caption"
-                                                                            color="text.secondary"
-                                                                            sx={{
-                                                                                fontSize:
-                                                                                    "0.72rem"
-                                                                            }}
-                                                                        >
-
-                                                                            {
-                                                                                formatCommentTime(
-                                                                                    comment.createdAt
-                                                                                )
-                                                                            }
-
-                                                                        </Typography>
-
-                                                                    )}
+                                                                   {comment.createdAt && (
+    <Typography
+        variant="caption"
+        color="text.secondary"
+        sx={{
+            fontSize: "0.72rem"
+        }}
+    >
+        {formatCommentTime(comment.createdAt)}
+        {" | "}
+        {new Date().toISOString()}
+    </Typography>
+)}
 
                                                                 </Box>
 
