@@ -123,7 +123,7 @@ function ForgotPassword() {
 
                     <TextField
                         fullWidth
-                        label="Email"
+                        label="Email "
                         type="email"
                         value={email}
                         onChange={(event) =>
