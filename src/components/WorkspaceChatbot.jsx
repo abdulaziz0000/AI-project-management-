@@ -152,9 +152,6 @@ const askQuestion = async () => {
             {/* =====================================================
                 CHAT TOGGLE BUTTON
             ====================================================== */}
-{/* =====================================================
-    CHAT TOGGLE BUTTON
-====================================================== */}
 {!open && (
     <Button
         variant="contained"
@@ -163,7 +160,11 @@ const askQuestion = async () => {
         sx={{
             position: "fixed",
             right: { xs: 16, sm: 24, md: 30 },
-            bottom: { xs: 16, sm: 24, md: 30 },
+            bottom: {
+                xs: "calc(16px + env(safe-area-inset-bottom))",
+                sm: 24,
+                md: 30
+            },
 
             minWidth: { xs: 120, sm: 150 },
             width: "auto",
@@ -197,56 +198,61 @@ const askQuestion = async () => {
 )}
 
 
-
             {/* =====================================================
                 CHAT WINDOW
             ====================================================== */}
 
             {open && (
 
-                <Paper
-                    elevation={10}
-                   sx={{
-    position: "fixed",
+               <Paper
+    elevation={10}
+    sx={{
+        position: "fixed",
 
-    right: {
-        xs: 8,
-        sm: 16,
-        md: 30
-    },
+        right: {
+            xs: 8,
+            sm: 16,
+            md: 30
+        },
 
-    bottom: {
-        xs: 8,
-        sm: 16,
-        md: 30
-    },
+        bottom: {
+            xs: "calc(8px + env(safe-area-inset-bottom))",
+            sm: 16,
+            md: 30
+        },
 
-    width: {
-        xs: "calc(100vw - 16px)",
-        sm: 380,
-        md: 380
-    },
+        width: {
+            xs: "calc(100vw - 16px)",
+            sm: 380,
+            md: 380
+        },
 
-    height: {
-        xs: "calc(100vh - 16px)",
-        sm: 560,
-        md: 560
-    },
+        // Normal, comfortable height instead of an oversized panel
+        height: {
+            xs: "min(70vh, 520px)",
+            sm: 520,
+            md: 560
+        },
 
-    maxWidth: "100vw",
-    maxHeight: "calc(100vh - 16px)",
+        maxWidth: "100vw",
 
-    borderRadius: {
-        xs: 2,
-        sm: 4
-    },
+        maxHeight: {
+            xs: "calc(100vh - 96px)",
+            sm: 560,
+            md: 560
+        },
 
-    overflow: "hidden",
-    display: "flex",
-    flexDirection: "column",
-    zIndex: 2000
-}}
-                >
+        borderRadius: {
+            xs: 2,
+            sm: 4
+        },
+
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        zIndex: 2000
+    }}
+>
 
                     {/* ================= HEADER ================= */}
 
