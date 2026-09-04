@@ -71,6 +71,7 @@ function ProjectDetails() {
             try {
 
                 const projectResponse = await getProjectById(id);
+                console.log("PROJECT DETAILS RESPONSE:", projectResponse.data);
                 const tasksResponse = await getTasksByProject(id);
 
                 setProject(projectResponse.data);

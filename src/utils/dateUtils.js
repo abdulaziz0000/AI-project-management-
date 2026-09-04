@@ -11,6 +11,11 @@ export const formatCommentTime = (createdAt) => {
         (Date.now() - createdTimestamp) / 1000
     );
 
+    // Future timestamp or very small clock difference
+    if (diffSeconds <= 0) {
+        return "just now";
+    }
+
     if (diffSeconds < 60) {
         return "just now";
     }
@@ -41,4 +46,3 @@ export const formatCommentTime = (createdAt) => {
 
     return new Date(createdTimestamp).toLocaleDateString();
 };
-
